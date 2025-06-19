@@ -115,7 +115,7 @@ This project consists of three main stages:
 ## Folder Structure
 
 ```
-monitoring-public-health/
+tracking-health-aid-disparities/
 ├── README.md
 ├── config.json
 ├── requirements.txt
