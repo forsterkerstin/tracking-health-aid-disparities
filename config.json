@@ -1,0 +1,7 @@
+{
+  "google_translate_api_key": "",
+  "data_dir": "data",
+  "llm_api_key": "",
+  "rate_limit": 10,
+  "model": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
+}

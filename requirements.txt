@@ -1,0 +1,14 @@
+aiohttp
+cartopy
+geopandas
+langdetect
+langid
+matplotlib
+nest_asyncio
+numpy
+pandas
+polars
+requests
+scipy
+seaborn
+scikit-learn
