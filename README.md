@@ -16,7 +16,10 @@ Reducing the global burden of disease is crucial for improving health outcomes w
     pip install -r requirements.txt
     ```
 
-3.  **Run scripts**:
+3. **Download data**:
+    Download the required `data` folder from https://osf.io/ce3q2/ and place it at root level, as specified in the folder structure below.
+
+4.  **Run scripts**:
     The `data` and `plots` folders will be automatically created at runtime as needed by the scripts.
 
     Run the scripts in the following order: `preprocessing` $\rightarrow$ `classification` $\rightarrow$ `visualization`. You can run `main.py` to execute the core analysis scripts without incurring API costs.
