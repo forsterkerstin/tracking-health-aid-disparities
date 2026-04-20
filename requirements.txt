@@ -1,14 +1,21 @@
-aiohttp
-cartopy
-geopandas
-langdetect
-langid
-matplotlib
-nest_asyncio
-numpy
-pandas
-polars
-requests
-scipy
-seaborn
-scikit-learn
+# Core data processing
+numpy>=1.26
+pandas>=2.2
+polars>=1.0
+scipy>=1.13
+scikit-learn>=1.5
+
+# HTTP / async clients for translation and LLM classification
+aiohttp>=3.9
+nest_asyncio>=1.6
+requests>=2.31
+
+# Language detection
+langdetect>=1.0.9
+langid>=1.1.6
+
+# Plotting and geospatial visualization
+matplotlib>=3.8
+seaborn>=0.13
+cartopy>=0.23
+geopandas>=0.14
