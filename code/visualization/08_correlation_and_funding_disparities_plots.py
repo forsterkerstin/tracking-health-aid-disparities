@@ -444,16 +444,17 @@ def plot_geoframe_subplots_rwb(
         sm, ax=ax, orientation="vertical", pad=0.02, aspect=20, shrink=0.5
     )
     cbar.set_label(
-        "Gap in aid and need percentiles",
+        """Aid-Burden\nPercentile Disparity""",
         rotation=270,
-        labelpad=15,
-        fontsize=14,
+        labelpad=60,
+        fontsize=26,
     )
 
     # Get current tick locations and create new labels with %
     ticks = cbar.get_ticks()
     cbar.set_ticks(ticks)
     cbar.set_ticklabels([f"{int(tick)}%" for tick in ticks])
+    cbar.ax.tick_params(labelsize=18)  # make the colorbar tick labels larger
 
     # Create custom legend for 'No reported aid' and 'No indicator data'
     legend_elements = [
@@ -465,7 +466,7 @@ def plot_geoframe_subplots_rwb(
             label="No reported aid",
             markerfacecolor="lightgray",
             markeredgecolor="lightgray",
-            markersize=10,
+            markersize=12,  # make marker bigger
         ),
         Line2D(
             [0],
@@ -475,15 +476,22 @@ def plot_geoframe_subplots_rwb(
             label="No disease data",
             markerfacecolor="whitesmoke",
             markeredgecolor="indianred",
-            markersize=10,
+            markersize=12,  # make marker bigger
             linestyle="none",
         ),
     ]
-    ax.legend(handles=legend_elements, loc="lower left")
+    ax.legend(
+        handles=legend_elements, 
+        loc="lower left", 
+        fontsize=13,         # make text bigger
+    )
 
     # Remove x and y axis from the map plot
     ax.set_axis_off()
-    ax.set_title(f"{file_name}", fontsize=16)
+    if file_name == "HIV–AIDS and sexually transmitted infections":
+        ax.set_title("HIV/AIDS and STIs", fontsize=32)
+    else:
+        ax.set_title(f"{file_name}", fontsize=32)
 
     plt.savefig(
         os.path.join(
@@ -580,7 +588,7 @@ def create_split_correlation_plots(
             )
 
             # Add correlation text
-            corr_str = f"r = {round(spearman_corr, 2)}"
+            corr_str = f"ρ = {round(spearman_corr, 2)}"
             p_str = f"p = {round(p_value, 2)}"
             n_str = f"n = {len(data)}"
 
@@ -1216,12 +1224,12 @@ def prepare_data_for_heatmap(
 
 # Main Execution
 def main():
-    # Load and preprocess data
-    funding_df_path = os.path.join(PROCESSED_DATA_DIR, "funding_df.csv")
-    if os.path.exists(funding_df_path):
-        funding_df = pd.read_csv(funding_df_path)
-    else:
-        funding_df = load_and_preprocess_funding_data()
+    # # Load and preprocess data
+    # funding_df_path = os.path.join(PROCESSED_DATA_DIR, "funding_df.csv")
+    # if os.path.exists(funding_df_path):
+    #     funding_df = pd.read_csv(funding_df_path)
+    # else:
+    #     funding_df = load_and_preprocess_funding_data()
 
     merged_df_path = os.path.join(PROCESSED_DATA_DIR, "merged_df.csv")
     if os.path.exists(merged_df_path):
@@ -1294,6 +1302,20 @@ def main():
                 .reset_index()
             )
 
+            category_df_grouped_for_correlation = (
+                category_df.groupby(
+                    ["country_code", "country_name", "IncomegroupName"]
+                )
+                .agg(
+                    {
+                        "USD_Disbursement_per_capita": "mean",
+                        "incidence_rate": "mean",
+                        "dalys_rate": "mean",
+                    }
+                )
+                .reset_index()
+            )
+
             filename = category.replace("/", "–")
 
             # Calculate within-group funding gaps
@@ -1346,7 +1368,7 @@ def main():
                 folder_path,
             )
             create_split_correlation_plots(
-                category_df_grouped,
+                category_df_grouped_for_correlation,
                 filename,
                 "dalys_rate",
                 "USD_Disbursement_per_capita",
