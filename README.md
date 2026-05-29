@@ -8,7 +8,7 @@ Reducing the global burden of disease is crucial for improving health outcomes. 
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/forsterkerstin/monitoring-public-health.git
+    git clone https://github.com/forsterkerstin/tracking-health-aid-disparities.git
     ```
 
 2.  **Install dependencies**:
