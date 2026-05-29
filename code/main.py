@@ -37,7 +37,7 @@ def create_data_directories():
 def run_script(script_name):
     # Construct the full path to the script
     script_path = os.path.join(
-        PROJECT_ROOT, "code", "Visualization", script_name
+        PROJECT_ROOT, "code", "visualization", script_name
     )
 
     # Check if the script exists

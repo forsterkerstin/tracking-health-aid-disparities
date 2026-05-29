@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pandas as pd
-
 from revision.paths import resolved_validation_csv
 
 
@@ -36,6 +35,12 @@ def merge_resolved_ground_truth(
         raise ValueError(f"Missing fallback label column {fallback_col!r}.")
 
     merged[output_col] = merged[fallback_col]
+
+    if "final_label" in merged.columns:
+        merged[output_col] = merged["final_label"].fillna(merged[fallback_col])
+        if output_col != "final_label":
+            merged = merged.drop(columns=["final_label"])
+        return merged
 
     resolved = load_resolved_validation_table()
     if resolved is None or raw_text_col not in merged.columns:
