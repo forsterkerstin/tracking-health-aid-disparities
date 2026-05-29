@@ -133,7 +133,9 @@ tracking-health-aid-disparities/
 │   │   ├── 07_aid_funding_plots.py
 │   │   ├── 08_correlation_and_funding_disparities_plots.py
 │   │   └── 09_comparing_classification_methods.py
-│   └── main.py
+│   ├── revision/
+│   ├── main.py
+│   └── run_revision_analysis.py
 ├── data/
 │   ├── processed/
 │   │   ├── aid_funding_data/
